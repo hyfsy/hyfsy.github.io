@@ -12,16 +12,16 @@ sitemap: false
 */
 
 // Partials
-@import "../../_sass/variables";
-@import "../../_sass/mixins";
-@import "../../_sass/normalize";
-@import "../../_sass/site";
-@import "../../_sass/typography";
-@import "../../_sass/elements";
-@import "../../_sass/syntax";
-@import "../../_sass/nav";
-@import "../../_sass/vendor/fonts";
-@import "../../_sass/vendor/font-awesome";
-@import "../../_sass/vendor/animate";
-@import "../../_sass/vendor/magnific-popup/magnific-popup";
-@import "../../_sass/print";
+@import "variables";
+@import "mixins";
+@import "normalize";
+@import "site";
+@import "typography";
+@import "elements";
+@import "syntax";
+@import "nav";
+@import "vendor/fonts";
+@import "vendor/font-awesome";
+@import "vendor/animate";
+@import "vendor/magnific-popup/magnific-popup";
+@import "print";

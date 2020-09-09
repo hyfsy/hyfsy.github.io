@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "使用静态站点生成器（jekyll）"
+title: "静态站点生成器 - jekyll"
 date: 2020-09-09
 excerpt: "jekyll theme problem"
 tags: [sample post, readability, test]
@@ -9,7 +9,17 @@ comments: false
 
 
 
-# 相关资源
+
+
+Jekyll 是一个简单免费的生成静态网页的工具，不需要数据库支持。GitHub Pages 也对jekyll提供了支持，使用jekyll对于初学者来说可以很不方便的在Github上部署自己的博客/简历等。
+
+此处介绍一下jekyll的部署和使用，后续功能不定期更新。。。
+
+
+
+# 1. 模板相关资源
+
+---
 
 - http://jekyllthemes.org/
 
@@ -17,8 +27,9 @@ comments: false
 
 
 
-# 安装jekyll
+# 2. 安装jekyll
 
+---
 
 
 下载并安装Ruby：http://www.ruby-lang.org/en/downloads/
@@ -50,7 +61,9 @@ jekyll -v
 
 
 
-# 更改gem、bundle拉取源地址
+# 3. 更改镜像源
+
+---
 
 **修改gem拉取源：**
 
@@ -70,7 +83,7 @@ gem sources --remove https://rubygems.org/
 gem sources -a https://gems.ruby-china.com/
 ```
 
-查看唯一的一个地址
+查看唯一的一个镜像源
 
 ```shell
 gem sources -l
@@ -86,15 +99,19 @@ bundle config mirror.https://rubygems.org https://gems.ruby-china.com/
 
 
 
-> 如果发现下载操作还是很慢，可以看看项目下的`Gemfile`文件，是否指定了source，修改一下即可
+> 如果发现下载操作还是很慢，可以看看项目下的`Gemfile`文件，是否指定了国外的**source**，修改一下即可
 
 
 
 
 
-# 启动jekyll服务
+# 4. 启动jekyll服务
 
-项目文件夹下初始化依赖包：
+---
+
+**项目文件夹下**初始化依赖包：
+
+这边初始化有点慢，建议耐心等待
 
 ```shell
 bundle init
@@ -112,8 +129,9 @@ jekyll s
 
 
 
-# 常见启动报错问题
+# 5. 常见启动报错问题
 
+---
 
 
 依赖关系问题导致构建错误
@@ -127,7 +145,7 @@ bundle exec jekyll s
 依赖包不存在
 
 ```shell
-gem install [依赖包名称]
+gem install 依赖包名称
 ```
 
 
@@ -136,11 +154,11 @@ gem install [依赖包名称]
 
 
 
+---
 
 
 
-
-
+> kramdown + 自定义样式 功能少又丑。。。
 
 
 

@@ -2,8 +2,8 @@
 layout: post
 title: "静态站点生成器 - jekyll"
 date: 2020-09-09
-excerpt: "jekyll theme problem"
-tags: [sample post, readability, test]
+excerpt: "简易入门"
+tags: [github, jekyll, html]
 comments: false
 ---
 
@@ -31,33 +31,40 @@ Jekyll 是一个简单免费的生成静态网页的工具，不需要数据库�
 
 ---
 
+jekyll依赖于Ruby，需要提前安装
 
 下载并安装Ruby：http://www.ruby-lang.org/en/downloads/
 
-> 一般安装完Ruby后都会带有Gem，没有的自己去下一个
+![download RubyInstaller](../pic/2020/09/09/001.png)
 
-
-检查：
-
-```shell
-ruby -v
-gem -v
-```
+我这边选择window版本的
 
 
 
-安装jekyll
+直接下一步安装即可，最后一步记得勾选 **Run 'ridk install' to setup MSYS2**
 
-```shell
-gem install jekyll
-```
-
-检查：
-```shell
-jekyll -v
-```
+![install ruby](../pic/2020/09/09/002.png)
 
 
+
+点击Finish，跳到cmd命令窗口，输入3等待安装完毕
+
+
+
+> 上面勾选了，一般安装完Ruby后都会带有Gem，没有的自己去下一个
+
+
+检查安装：`ruby -v`、`gem -v`
+
+
+
+安装jekyll：`gem install jekyll`
+
+检查安装：`jekyll -v`
+
+
+
+安装bundle：`gem install bundler`
 
 
 
@@ -67,7 +74,7 @@ jekyll -v
 
 **修改gem拉取源：**
 
-将原本的国外镜像改为开源中国的镜像
+将原本的国外镜像改为开源中国的镜像（淘宝的镜像已经没用了）
 
 
 
@@ -123,7 +130,7 @@ bundle init
 jekyll s
 ```
 
-正常的访问地址：http://localhost:4000
+正常的访问地址：http://localhost:4000（具体可以看cmd输出的提示）
 
 
 
@@ -158,7 +165,15 @@ gem install 依赖包名称
 
 
 
+展示下GitHub下感人的网速
+
+![slow outer internet](../pic/2020/09/09/010.png)
+
+
+
 > kramdown + 自定义样式 功能少又丑。。。
+>
+> 有时间的重新弄弄
 
 
 

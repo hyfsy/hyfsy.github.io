@@ -37,11 +37,13 @@ disqus_shortname:   taylantatli
   #ad-client:
   #ad-slot:
 #bing-verify:
-#email:
-#twitter:            username
-#facebook:           username
+email:              1577975140@qq.com
 github-url:         hyfsy
-#stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
+stackoverflow:     14536068/bab-hyf
+twitter:            HyfBab
+steam:              username
+#facebook:           username reject
+#youtube:           username google
 #linkedin:          username
 #xing:              username
 #instagram:          username
@@ -50,9 +52,7 @@ github-url:         hyfsy
 #medium:            '@username'
 #pinterest:         username
 #foursquare:        username
-steam:              username
 #dribbble:          username
-#youtube:           username
 #youtube-channel:   channel
 #soundcloud:        username
 #weibo:             username

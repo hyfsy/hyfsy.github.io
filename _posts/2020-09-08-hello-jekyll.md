@@ -27,7 +27,7 @@ Jekyll 是一个简单免费的生成静态网页的工具，不需要数据库�
 
 
 
-# 2. 安装jekyll
+# 2. 环境安装
 
 ---
 
@@ -57,6 +57,8 @@ jekyll依赖于Ruby，需要提前安装
 检查安装：`ruby -v`、`gem -v`
 
 
+
+==此处也可以先按照下面更改镜像源后再尝试==
 
 安装jekyll：`gem install jekyll`
 
@@ -165,7 +167,7 @@ gem install 依赖包名称
 
 
 
-展示下GitHub下感人的网速
+最后展示下GitHub Pages下感人的网速
 
 ![slow outer internet](../pic/2020/09/09/010.png)
 
@@ -173,7 +175,7 @@ gem install 依赖包名称
 
 > kramdown + 自定义样式 功能少又丑。。。
 >
-> 有时间的重新弄弄
+> 有时间的再重新弄弄
 
 
 

@@ -83,7 +83,7 @@ static final class WorkQueue {
 
 
 
-![queuefield](../img/2021/01/25/007.png)
+![queuefield](../images/2021/01/25/007.png)
 
 
 
@@ -131,7 +131,7 @@ volatile AtomicLong stealCounter;    // 统计用，也作为runState的锁（�
 
 
 
-![poolfield](../img/2021/01/25/008.png)
+![poolfield](../images/2021/01/25/008.png)
 
 
 
@@ -145,7 +145,7 @@ ctl的sp位保存着`WorkQueue`的**scanState**状态，该状态保存着`WorkQ
 
 
 
-![treiberstack](../img/2021/01/25/009.png)
+![treiberstack](../images/2021/01/25/009.png)
 
 
 
@@ -252,7 +252,7 @@ private ForkJoinPool(int parallelism,
 
 先看下提交流程的大致逻辑：
 
-![addtask](../img/2021/01/25/010.png)
+![addtask](../images/2021/01/25/010.png)
 
 
 
@@ -416,7 +416,7 @@ final void signalWork(WorkQueue[] ws, WorkQueue q) {
 
 
 
-![createWorker](../img/2021/01/25/011.png)
+![createWorker](../images/2021/01/25/011.png)
 
 
 
@@ -596,7 +596,7 @@ final void deregisterWorker(ForkJoinWorkerThread wt, Throwable ex) {
 
 流程如下：
 
-![startworker](../img/2021/01/25/012.png)
+![startworker](../images/2021/01/25/012.png)
 
 
 
@@ -660,7 +660,7 @@ final void runWorker(WorkQueue w) {
 
 逻辑如下：
 
-![scantask](../img/2021/01/25/013.png)
+![scantask](../images/2021/01/25/013.png)
 
 
 
@@ -945,7 +945,7 @@ public final ForkJoinTask<V> fork() {
 
 看下逻辑：
 
-![taskjoin](../img/2021/01/25/014.png)
+![taskjoin](../images/2021/01/25/014.png)
 
 
 
@@ -1265,7 +1265,7 @@ public List<Runnable> shutdownNow() {
 
 大概逻辑如下：
 
-![terminate](../img/2021/01/25/015.png)
+![terminate](../images/2021/01/25/015.png)
 
 
 
@@ -1380,7 +1380,7 @@ private boolean tryTerminate(boolean now, boolean enable) {
 
 
 
-![awaittermination](../img/2021/01/25/016.png)
+![awaittermination](../images/2021/01/25/016.png)
 
 
 
@@ -1865,7 +1865,7 @@ private WorkQueue findNonEmptyStealQueue() {
 
 类似于这种结构：
 
-![countedcompleter](../img/2021/01/25/017.png)
+![countedcompleter](../images/2021/01/25/017.png)
 
 
 

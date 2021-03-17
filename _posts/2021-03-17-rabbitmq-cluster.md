@@ -38,7 +38,7 @@ vi /etc/hosts
 
 添加所有节点的映射关系（包括自己），格式：`ip hostname`。
 
-![hosts](../img/2021/03/17/001.png)
+![hosts](../images/2021/03/17/001.png)
 
 
 
@@ -81,7 +81,7 @@ rabbitmqctl cluster_status
 
 7、界面验证
 
-![nodes](../img/2021/03/17/002.png)
+![nodes](../images/2021/03/17/002.png)
 
 
 
@@ -115,7 +115,7 @@ rabbitmqctl set_policy ha_all \
 
 看到队列已经存在该镜像策略了
 
-![ha_policy](../img/2021/03/17/003.png)
+![ha_policy](../images/2021/03/17/003.png)
 
 
 
@@ -127,7 +127,7 @@ rabbitmqctl set_policy ha_all \
 
 建立在普通集群的基础上，只是队列类型改变为quorum了而已。
 
-![quorum](../img/2021/03/17/004.png)
+![quorum](../images/2021/03/17/004.png)
 
 
 
@@ -171,7 +171,7 @@ rabbitmqctl -n rabbit-3 start_app
 
 可以看到界面上的集群节点了
 
-![single_cluster](../img/2021/03/17/005.png)
+![single_cluster](../images/2021/03/17/005.png)
 
 
 

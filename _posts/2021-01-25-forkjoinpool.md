@@ -17,7 +17,7 @@ comments: false
 
 通俗的说，就是将大型复杂任务进行递归的分解，直到任务足够小才直接执行，从而递归的返回各个足够小的任务的结果汇集成一个大任务的结果，依次类推得出最初提交的那个任务的结果，这和方法的递归调用思想是一样的。
 
-![forkjoin](../img/2021/01/25/001.png)
+![forkjoin](../images/2021/01/25/001.png)
 
 `ForkJoinPool`为了提高任务的并行度和吞吐量做了非常多而且复杂的设计实现，其中最重要的就是**任务窃取**机制。
 
@@ -35,7 +35,7 @@ comments: false
 
 ForkJoinPool的整体结构图
 
-![pool](../img/2021/01/25/002.png)
+![pool](../images/2021/01/25/002.png)
 
 `ForkJoinPool`中存有一个`WorkQueue[]`的引用。
 
@@ -101,13 +101,13 @@ ForkJoinPool pool = ForkJoinPool.commonPool();
 
 添加任务的流程大概是这样的
 
-![addtask](../img/2021/01/25/010.png)
+![addtask](../images/2021/01/25/010.png)
 
 
 
 线程被创建后就进入了循环的执行任务的过程
 
-![startworker](../img/2021/01/25/012.png)
+![startworker](../images/2021/01/25/012.png)
 
 
 
@@ -137,7 +137,7 @@ ForkJoinPool pool = ForkJoinPool.commonPool();
 
 数组用两个重要的指针标记：**top**、**base**，初始指向为数组容量的一半。top为插入元素的指针，base为偷窃元素的指针。通过两个指针操作数组中的数据，支持栈和队列结构的数据获取方式。
 
-![qinit](../img/2021/01/25/003.png)
+![qinit](../images/2021/01/25/003.png)
 
 
 
@@ -145,19 +145,19 @@ ForkJoinPool pool = ForkJoinPool.commonPool();
 
 - **push**：入队一个ForkJoinTask
 
-  ![qpush](../img/2021/01/25/004.png)
+  ![qpush](../images/2021/01/25/004.png)
 
 
 
 - **pop**：出队一个ForkJoinTask
 
-  ![qpop](../img/2021/01/25/005.png)
+  ![qpop](../images/2021/01/25/005.png)
 
 
 
 - **poll**：偷窃一个ForkJoinTask
 
-  ![qpoll](../img/2021/01/25/006.png)
+  ![qpoll](../images/2021/01/25/006.png)
 
 
 
@@ -241,7 +241,7 @@ static class CountTask extends RecursiveTask<Integer> {
 
 流程类似于这样：
 
-![taskjoin3](../img/2021/01/25/014_2.png)
+![taskjoin3](../images/2021/01/25/014_2.png)
 
 
 

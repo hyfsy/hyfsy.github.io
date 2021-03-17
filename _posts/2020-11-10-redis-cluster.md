@@ -135,7 +135,7 @@ bin/redis-cli --cluster create 127.0.0.1:6379 127.0.0.1:6380 127.0.0.1:6381 127.
 
 启动后，看到如下内容
 
-![merge reids instance](../img/2020/11/10/001.png)
+![merge reids instance](../images/2020/11/10/001.png)
 
 
 
@@ -171,7 +171,7 @@ bin/redis-cli -c -p 6379 -a password
 
 测试集群客户端操作
 
-![set key](../img/2020/11/10/002.png)
+![set key](../images/2020/11/10/002.png)
 
 
 

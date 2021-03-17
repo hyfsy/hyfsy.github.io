@@ -35,7 +35,7 @@ jekyll依赖于Ruby，需要提前安装
 
 下载并安装Ruby：http://www.ruby-lang.org/en/downloads/
 
-![download RubyInstaller](../pic/2020/09/09/001.png)
+![download RubyInstaller](../img/2020/09/09/001.png)
 
 我这边选择window版本的
 
@@ -43,7 +43,7 @@ jekyll依赖于Ruby，需要提前安装
 
 直接下一步安装即可，最后一步记得勾选 **Run 'ridk install' to setup MSYS2**
 
-![install ruby](../pic/2020/09/09/002.png)
+![install ruby](../img/2020/09/09/002.png)
 
 
 
@@ -169,7 +169,7 @@ gem install 依赖包名称
 
 最后展示下GitHub Pages下感人的网速
 
-![slow outer internet](../pic/2020/09/09/010.png)
+![slow outer internet](../img/2020/09/09/010.png)
 
 
 

@@ -31,7 +31,7 @@ GitHub Pages，一般多用于托管个人的静态网站，所以现在很多�
 
 创建自己域名的仓库：`[username].github.io`
 
-![create new repository](../pic/2020/09/09/003.png)
+![create new repository](../img/2020/09/09/003.png)
 
 
 
@@ -45,7 +45,7 @@ GitHub内部本身支持jekyll，所以此处采用该静态站点生成器
 
 目录结构：
 
-![project structure](../pic/2020/09/09/004.png)
+![project structure](../img/2020/09/09/004.png)
 
 
 
@@ -89,7 +89,7 @@ GitHub内部本身支持jekyll，所以此处采用该静态站点生成器
 
 进入Settings
 
-![Settings](../pic/2020/09/09/005.png)
+![Settings](../img/2020/09/09/005.png)
 
 
 
@@ -97,7 +97,7 @@ GitHub内部本身支持jekyll，所以此处采用该静态站点生成器
 
 下拉到 GitHub Pages 模块
 
-![Settings GitHub Pages](../pic/2020/09/09/006.png)
+![Settings GitHub Pages](../img/2020/09/09/006.png)
 
 
 
@@ -125,13 +125,13 @@ GitHub内部本身支持jekyll，所以此处采用该静态站点生成器
 
 一开始是按照上面那样部署成功的，由于刚弄，很多东西都不太完善，然后想搞个文件夹专门放博客项目的，然后噩梦就来了
 
-![email scss](../pic/2020/09/09/007.png)
+![email scss](../img/2020/09/09/007.png)
 
 
 
 一开始没注意这邮件，发我邮箱的，然后我更新了一些东西到我项目上，就开始频繁的发邮件给我了，我看的是一脸闷逼，啥也不懂怎么jekyll就构建失败了，然后我就按照邮件上面的提示信息去找，检查我本地的scss文件，路径报错，改了还是没用，找了一会发现_config.yml内已经配置了scss路径，所以直接引用就可以了，报错也没事，又还原，想想之前是编译成功的，应该不是文件的问题
 
-![help scss](../pic/2020/09/09/008.png)
+![help scss](../img/2020/09/09/008.png)
 
 
 
@@ -149,7 +149,7 @@ GitHub内部本身支持jekyll，所以此处采用该静态站点生成器
 
 展示下噩梦邮件，每次上传项目进行构建都心惊胆战的
 
-![nightmare email](../pic/2020/09/09/009.png)
+![nightmare email](../img/2020/09/09/009.png)
 
 不过还好总算告一段落了
 

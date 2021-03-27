@@ -178,17 +178,28 @@ rabbitmqctl -n rabbit-3 start_app
 4、停止服务
 
 ```shell
-rabbitmqctl stop -n rabbit-3@root
 rabbitmqctl stop -n rabbit-2@root
+rabbitmqctl stop -n rabbit-3@root
 ```
 
 
 
 
 
+## SpringBoot连接集群
 
+---
 
+配置文件配置节点地址，**addresses** 和 **host** 同时存在的情况会优先选择 **addresses**。
 
+```yaml
+spring:
+  rabbitmq:
+    addresses: <ip>,<ip>
+	# host: <ip>
+```
+
+> 单机多实例的情况IP可以改成 **amqp://hyfsy:11111@192.168.190.188:5672/vhost1** 类型的格式
 
 
 

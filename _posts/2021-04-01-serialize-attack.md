@@ -413,3 +413,11 @@ ParserConfig.getGlobalInstance().setSafeMode(true);
 
 
 
+## 参考安全博客网站
+
+- https://paper.seebug.org
+
+- https://kingx.me
+
+
+

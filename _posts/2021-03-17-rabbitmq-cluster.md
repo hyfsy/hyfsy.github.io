@@ -186,7 +186,7 @@ rabbitmqctl stop -n rabbit-3@root
 
 
 
-## SpringBoot连接集群
+## 5. SpringBoot连接集群
 
 ---
 

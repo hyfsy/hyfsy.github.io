@@ -25,9 +25,9 @@ SONATYPE：一个组织机构，管理maven中央仓库
 
 JIRA：问题管理系统（jar上传中央仓库的平台接入口，主要交互的地方）
 
-NEXUS：暂存仓库（最终会发布到中央仓库）
-
 OSSRH：Sonartype的OSS存储库托管，使用Sonatype Nexus存储库管理器
+
+Sonatype NEXUS：SONATYPE的暂存仓库（最终会同步到中央仓库）
 
 
 
@@ -93,7 +93,7 @@ issue的Status状态变为Resolved状态时，说明可以上传jar包了。
 
 ### 2.4. GPG注册
 
-部署jar包需要验证签名
+部署的jar包需要验证签名
 
 下载：https://www.gpg4win.org/download.html
 
@@ -109,7 +109,10 @@ gpg --version
 gpg --gen-key
 # 输入用户名，为JIRA的用户名
 # 输入邮箱，为JIRA的邮箱
-# 输入秘钥的密码
+# 输入秘钥的密码，自己输入一个，后续需要使用
+
+# 查看所有本地公私钥 或 通过桌面生成的快捷方式查看
+gpg --list-keys
 ```
 
 
@@ -124,24 +127,20 @@ gpg --gen-key
 # 要确保 keyserver.ubuntu.com:11371 服务器是可用的
 
 # 上传到服务器
-gpg --keyserver hkp://keyserver.ubuntu.com:11371 --send-keys PUBLIC_KEY
+gpg --keyserver hkp://keyserver.ubuntu.com:11371 --send-keys YOUR_PUBLIC_KEY
 # 查看是否上传成功，要等待一会儿
-gpg --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys PUBLIC_KEY
-
-
-# 查看所有本地公私钥 或 通过桌面生成的快捷方式查看
-gpg --list-keys
+gpg --keyserver hkp://keyserver.ubuntu.com:11371 --recv-keys YOUR_PUBLIC_KEY
 ```
 
 
 
 
 
-### 2.5. 项目信息修改
+### 2.5. 部署信息修改
 
-在项目中添加一些校验需要的内容
+添加一些发布必须的内容
 
-maven的settings.xml添加
+maven的**settings.xml**添加
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -149,7 +148,7 @@ maven的settings.xml添加
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-   <!-- Nexus服务器地址，和JIRA的用户信息一样 --> 
+	<!-- Nexus服务器地址，和JIRA的用户信息一样 --> 
 	<servers>
 		<server>
 			<id>sonatype-oss</id>
@@ -158,7 +157,7 @@ maven的settings.xml添加
 		</server>
 	</servers>
 
-   <!-- gpg环境，方便上传到Nexus的文件自动Close并Release --> 
+	<!-- gpg环境，方便上传到Nexus的文件自动Close并Release --> 
 	<profiles>
 		<profile>
 			<id>ossrh</id>
@@ -167,7 +166,7 @@ maven的settings.xml添加
 			</activation>
 			<properties>
 				<gpg.executable>gpg</gpg.executable>
-				<gpg.passphrase>GPG_PASSPHRASE</gpg.passphrase>
+				<gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>
 			</properties>
 		</profile>
 	</profiles>
@@ -176,7 +175,7 @@ maven的settings.xml添加
 
 
 
-项目pom.xml添加
+项目**pom.xml**添加
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -312,7 +311,7 @@ maven的settings.xml添加
                             </links>
                         </configuration>
                     </plugin>
-                    <!-- GPG -->
+                    <!-- GPG 验签 -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -332,6 +331,7 @@ maven的settings.xml添加
                         </configuration>
                     </plugin>
                     <!-- 上传到Nexus中自动Close并Release，无需再进入Nexus操作 -->
+                    <!-- 第一次发布不放心，可禁用，手动到服务器上去确认 -->
                     <plugin>
                         <!-- 爆红不管 -->
                         <groupId>org.sonatype.plugins</groupId>
@@ -339,7 +339,7 @@ maven的settings.xml添加
                         <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
-                			<!-- id要与settings.xml里的server指定的id保持一致 -->
+                            <!-- id要与settings.xml里的server指定的id保持一致 -->
                             <serverId>sonatype-oss</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                             <autoReleaseAfterClose>${auto.close.and.release}</autoReleaseAfterClose>
@@ -348,7 +348,7 @@ maven的settings.xml添加
                 </plugins>
             </build>
 
-            <!-- Upload repository -->
+            <!-- Upload repository 发布的远程仓库 -->
             <distributionManagement>
                 <!-- id要与settings.xml里的server指定的id保持一致 -->
                 <snapshotRepository>
@@ -379,7 +379,7 @@ maven的settings.xml添加
 mvn clean deploy -P release # 指定了release环境
 ```
 
-> 如果没有配置nexus-staging-maven-plugin，在verify阶段需要输入上面的 passphrase 秘钥密码
+> 如果没有配置 **nexus-staging-maven-plugin**，在verify阶段还会需要输入上面的 **passphrase** 秘钥密码
 
 
 
@@ -393,11 +393,11 @@ mvn clean deploy -P release # 指定了release环境
 
 ![](../images/2021/05/08/007.png)
 
-点击Staging Repositories（阶段存储库），查看所有部署的jar信息，点击Close会开始进行仓库的相关校验，失败会有提示信息。
+点击Staging Repositories（阶段存储库），查看所有部署的jar信息，点击Close会开始进行artifact（人工制品）的相关校验，失败会有提示信息。
 
-成功后点击Release会发布到[OSSRH的版本库](https://repo1.maven.org/maven2)中（10分钟），随后同步到[MAVEN中央仓库](https://search.maven.org)。
+校验成功后点击Release会发布到[OSSRH的版本库](https://repo1.maven.org/maven2)中（10分钟），随后同步到[MAVEN中央仓库](https://search.maven.org)（2小时），[老仓库](https://mvnrepository.com)同步所需的时间会更久一点。
 
-第一次发布后，需要通知工作人员激活同步功能。
+> 第一次发布成功后，需要通知工作人员激活中央仓库的同步
 
 
 

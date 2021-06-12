@@ -19,6 +19,7 @@ comments: false
 
 ```bash
 git clone https://github.com/apache/skywalking.git
+cd skywalking/
 git submodule init
 git submodule update # 拉取ui项目为子模块
 "\path\to\3.6+maven\bin\mvn" install -Dmaven.test.skip=true # 打包

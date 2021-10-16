@@ -130,6 +130,8 @@ bundle init
 
 ```shell
 jekyll s
+# or
+bundle exec jekyll s
 ```
 
 正常的访问地址：http://localhost:4000（具体可以看cmd输出的提示）

@@ -14,9 +14,16 @@ comments: false
 
 ---
 
+
+
+集群依赖于Ruby
+
+```
+yum install ruby
+yum install rubygems
+```
+
 > 章节1. 的操作可先不配置，看看
-
-
 
 
 

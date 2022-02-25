@@ -29,13 +29,15 @@ spring.output.ansi.enabled=always
 
 log4j2.xml
 
+{% raw %}
+
 ```xml
 <Console name="Console" target="SYSTEM_OUT">
 	<PatternLayout pattern="%clr{%d{yyyy-MM-dd HH:mm:ss,SSS}}{magenta} %clr{%pid}{blue} %clr{%5p} --- %cyan{%l} --- %m %n" />
 </Console>
 ```
 
-
+{% endraw %}
 
 
 

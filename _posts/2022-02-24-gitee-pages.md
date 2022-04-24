@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "搭建 Gitee Pages"
-date: 2020-09-09
+date: 2022-02-24
 excerpt: "简易入门"
-tags: [git]
+tags: [gitee]
 comments: false
 ---
 

@@ -13,7 +13,9 @@ comments: false
 
 使用JVM版本：jdk8u181
 
-下载安装工具：[DCEVM](../images/2022/04/24/attach/DCEVM-8u181-installer.jar)
+下载安装工具：<a href = "../images/2022/04/24/attach/DCEVM-8u181-installer.jar" download = "DCEVM-8u181-installer.jar">DCEVM</a>
+
+<a onclick= "window.open('../images/2022/04/24/attach/DCEVM-8u181-installer.jar')">DCEVM</a>
 
 使用其他版本的jdk执行以下命令：
 

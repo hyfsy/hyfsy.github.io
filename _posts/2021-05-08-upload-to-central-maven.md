@@ -196,7 +196,7 @@ maven的**settings.xml**添加
         <jdk.version>8</jdk.version>
         <javadoc.skip>false</javadoc.skip>
         <gpg.skip>false</gpg.skip>
-        <auto.close.and.release>true</auto.close.and.release>
+        <auto.close.and.release>false</auto.close.and.release>
     </properties>
 
     <!-- 项目基本信息 -->
@@ -342,6 +342,7 @@ maven的**settings.xml**添加
                             <!-- id要与settings.xml里的server指定的id保持一致 -->
                             <serverId>sonatype-oss</serverId>
                             <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <!-- 发布到阶段存储库成功后是否自动Release，进行中央仓库的同步，这里我们默认去网页上手动进行同步 -->
                             <autoReleaseAfterClose>${auto.close.and.release}</autoReleaseAfterClose>
                         </configuration>
                     </plugin>

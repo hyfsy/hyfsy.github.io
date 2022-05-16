@@ -36,26 +36,24 @@ IDEA小锤子的远程版
 
 # 3. 使用
 
-> 目前懒得发布maven中央仓库，请自行拉取源代码打包，文末有源码地址
-
 1、需要热刷新的应用系统引入依赖：
 
 ```xml
 <dependency>
     <groupId>com.hyf</groupId>
-    <artifactId>hot-refresh-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <artifactId>hot-refresh-server</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
 2、启动应用系统
 
-3、获取本地服务器jar包：`hot-refresh-server-1.0.0-SNAPSHOT`
+3、获取本地服务器jar包：[hot-refresh-client-1.0.0.jar](https://github.com/hyfsy/hot-refresh/releases)
 
 4、进入命令行界面，启动本地服务器：
 
 ```bash
-java -jar hot-refresh-server-1.0.0-SNAPSHOT.jar -h C:\\Users\\baB_hyf\\Desktop\\test -s http://localhost:8082/rest
+java -jar hot-refresh-client.jar -h C:\\Users\\baB_hyf\\Desktop\\test -s http://localhost:8082/rest
 ```
 
 - `-h`：本地编写代码的工作目录（默认当前命令行目录）
@@ -65,16 +63,7 @@ java -jar hot-refresh-server-1.0.0-SNAPSHOT.jar -h C:\\Users\\baB_hyf\\Desktop\\
 
 
 
-# 4. 模块介绍
-
-- `hot-refresh-common`：客户端、服务端公用的基础模块
-- `hot-refresh-core`：热刷新核心包，应用系统引入
-- `hot-refresh-server`：本地服务包，监听本地工作目录
-- `hot-refresh-test-springboot`：本地测试包，模拟需要热刷新的应用系统
-
-
-
-# 5. 注意事项
+# 4. 注意事项
 
 1. 暂时只支持SpringBoot环境，可提交PR添加其他环境的支持
 2. 只支持JDK环境，JRE环境不支持
@@ -84,13 +73,20 @@ java -jar hot-refresh-server-1.0.0-SNAPSHOT.jar -h C:\\Users\\baB_hyf\\Desktop\\
 
 
 
+# 5. 未来规划
+
+- [ ] 服务端提供IDEA插件
+- [ ] jar包热刷新支持
+- [x] 集成Lombok
+- [x] 集成MapStruct
+- [ ] 集成Spring
+- [ ] 集成MyBatis
+
+
+
 # 6. 源代码地址
 
-[Gitee](https://gitee.com/hyfsynb/hot-refresh)
-
-
-
-
+[Github](https://github.com/hyfsy/hot-refresh)
 
 
 

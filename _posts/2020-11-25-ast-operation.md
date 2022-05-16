@@ -192,7 +192,7 @@ public abstract JCTree.Tag getTag(); // 获取当前的节点类型，如if节�
 @SupportedAnnotationTypes("com.hyf.processor.core.GetterSetter")
 public class MyProcessor extends AbstractProcessor {
 
-	private JavacTrees javacTrees; // AST工具，专门用来获取抽象语法树
+    private JavacTrees javacTrees; // AST工具，专门用来获取抽象语法树
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {

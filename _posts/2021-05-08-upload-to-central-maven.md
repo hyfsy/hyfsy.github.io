@@ -394,11 +394,13 @@ mvn clean deploy -P release # 指定了release环境
 
 ![](../images/2021/05/08/007.png)
 
-点击Staging Repositories（阶段存储库），查看所有部署的jar信息，点击Close会开始进行artifact（人工制品）的相关校验，失败会有提示信息。
+点击Staging Repositories（阶段存储库），查看所有部署的jar信息，点击Close会开始进行artifact（人工制品）的相关校验，失败会有提示信息，校验成功后点击Release会进行仓库的发布。
 
-校验成功后点击Release会发布到[OSSRH的版本库](https://repo1.maven.org/maven2)中（10分钟），随后同步到[MAVEN中央仓库](https://search.maven.org)（2小时），[老仓库](https://mvnrepository.com)同步所需的时间会更久一点。
+> 需要特别注意：相同版本的制品只能Release一次，重复Release会发布失败，所以在Release前请仔细检查Content下将要发布的制品是否存在问题。
 
-> 第一次发布成功后，需要通知工作人员激活中央仓库的同步
+Release成功以后，会发布到[OSSRH的版本库](https://repo1.maven.org/maven2)中（10分钟），随后同步到[MAVEN中央仓库](https://search.maven.org)（2小时），[老仓库](https://mvnrepository.com)同步所需的时间会更久一点。
+
+> ~~第一次发布成功后，需要通知工作人员激活中央仓库的同步~~
 
 
 

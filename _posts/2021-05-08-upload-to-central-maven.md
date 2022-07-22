@@ -157,13 +157,14 @@ maven的**settings.xml**添加
 		</server>
 	</servers>
 
-	<!-- gpg环境，方便上传到Nexus的文件自动Close并Release --> 
+	<!-- gpg环境，方便上传到Nexus的文件自动Close并Release -->
 	<profiles>
 		<profile>
 			<id>ossrh</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+    		<!-- 在maven发布的时候无需再输入gpg私钥的密码？好像无效 -->
+      		<activation>
+        		<activeByDefault>true</activeByDefault>
+      		</activation>
 			<properties>
 				<gpg.executable>gpg</gpg.executable>
 				<gpg.passphrase>YOUR_GPG_PASSPHRASE</gpg.passphrase>

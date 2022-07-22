@@ -32,6 +32,8 @@ IDEA小锤子的远程版
 
 本地修改代码后，远程服务器自动热刷新，效果实时生效
 
+欢迎PR :)
+
 
 
 # 3. 使用
@@ -40,26 +42,28 @@ IDEA小锤子的远程版
 
 ```xml
 <dependency>
-    <groupId>com.hyf</groupId>
-    <artifactId>hot-refresh-server</artifactId>
-    <version>1.0.0</version>
+    <groupId>io.github.hyfsy</groupId>
+    <artifactId>hot-refresh-server-all</artifactId>
+    <version>1.2.2</version>
 </dependency>
 ```
 
 2、启动应用系统
 
-3、获取本地服务器jar包：[hot-refresh-client-1.0.0.jar](https://github.com/hyfsy/hot-refresh/releases)
+3、获取本地服务器部署包：[hot-refresh-client.zip](https://github.com/hyfsy/hot-refresh/releases)
 
-4、进入命令行界面，启动本地服务器：
+4、解压后，启动本地服务器：
 
 ```bash
-java -jar hot-refresh-client.jar -h C:\\Users\\baB_hyf\\Desktop\\test -s http://localhost:8082/rest
+bin/hot.cmd -s http://localhost:8080
 ```
 
 - `-h`：本地编写代码的工作目录（默认当前命令行目录）
 - `-s`：需要热刷新的应用系统地址，到servlet路径，如：http://localhost:8080/ctx-path/rest/
+- `-d`：启用客户端调试模式
 
 5、修改`-h`指定的工作目录下的java文件可看到应用系统热刷新
+
 
 
 
@@ -79,22 +83,19 @@ java -jar hot-refresh-client.jar -h C:\\Users\\baB_hyf\\Desktop\\test -s http://
 - [ ] jar包热刷新支持
 - [x] 集成Lombok
 - [x] 集成MapStruct
-- [ ] 集成Spring
+- [ ] 集成Proxy
+- [x] 集成Spring
 - [ ] 集成MyBatis
+- [ ] 集成SkyWalking
+- [ ] 集成Arthas
+
+
 
 
 
 # 6. 源代码地址
 
 [Github](https://github.com/hyfsy/hot-refresh)
-
-
-
-
-
-
-
-
 
 
 

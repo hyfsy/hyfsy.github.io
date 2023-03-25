@@ -37,6 +37,20 @@ Sonatype NEXUS：SONATYPE的暂存仓库（最终会同步到中央仓库）
 
 ---
 
+
+
+> 大致流程如下：
+>
+> 1、创建Nexus账户及域名验证（仅需一次）
+>
+> 2、pom添加配置
+>
+> 3、发布
+
+
+
+
+
 ### 2.1. 注册JIRA账户
 
 https://issues.sonatype.org/secure/Signup!default.jspa

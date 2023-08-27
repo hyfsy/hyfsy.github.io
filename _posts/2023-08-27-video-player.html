@@ -1,0 +1,138 @@
+---
+layout: default_html
+title: 快捷播放器
+date: 2023-08-27
+excerpt: "方便看视频"
+tags: [html, m3u8]
+comments: false
+project: true
+---
+
+<!--<!DOCTYPE html>-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>在线播放</title>
+</head>
+<body>
+	<br />
+	<label for="url" style="font-size: 25px;">M3U8文件地址：</label>
+	<input id="url" name="url" type="text" style="width:500px;height:60px;font-size: 25px;" />
+	<input id="clean" type="button" value="清空" style="font-size: 35px;">
+	<input id="commit" type="button" value="开始播放" style="font-size: 35px;">
+	<br />
+	<span>多个分号 ; 分隔</span>
+	<br />
+	<div id="videoBody">
+		<!--<iframe id="video" width="100%" height="500px" src="https://www.baidu.com"></iframe>-->
+		<!--<input id="prev" type="button" value="上一集" style="font-size: 50px;" onclick="prev();">-->
+		<!--<span id="num" style="font-size: 50px;">1/52</span>-->
+		<!--<input id="next" type="button" value="下一集" style="font-size: 50px;" onclick="next();">-->
+		<!--<input name="videoList" type="button" value="1" style="font-size: 50px;margin-left: 5px;margin-right: 5px;" onclick="chooseVideo(event);">-->
+	</div>
+	<script>
+		var urlInput = document.querySelector('#url');
+		var videoBody = document.querySelector('#videoBody');
+
+		var videoList = [];
+		var cur = -1;
+
+		function getPlayUrl(m3u8Url) {
+			// https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
+			// https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
+			// https://jx.xbiqu5.com/bofang/?https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
+			// https://help.siwazywcdn2.com:5278/m3u8.php?url=https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
+			return 'https://help.siwazywcdn2.com:5278/m3u8.php?url=' + m3u8Url;
+		}
+
+		document.querySelector('#clean').addEventListener('click', function(e) {
+			urlInput.value = '';
+			videoBody.innerHTML = '';
+		});
+
+		document.querySelector('#commit').addEventListener('click', function(e) {
+			if (urlInput.value === '') {
+				alert("请输入资源地址！");
+				return;
+			}
+			var m3u8Url = urlInput.value;
+			var urls = m3u8Url.split(";");
+			cur = 0;
+			videoList = urls;
+
+			var multiVideo = videoList.length > 1;
+
+			var body = '<iframe id="video" width="100%" height="500px" src="' + getPlayUrl(videoList[cur]) + '"></iframe>';
+
+			if (multiVideo) {
+				body +=
+					'\t\t<br />' +
+					'\t\t<input id="prev" type="button" value="上一集" style="font-size: 50px;">\n' +
+					'\t\t<span id="num" style="font-size: 50px;">' + (cur + 1) + '/' + videoList.length + '</span>\n' +
+					'\t\t<input id="next" type="button" value="下一集" style="font-size: 50px;">'
+				;
+				body += '\t\t<br />\t\t<br />';
+				for (let i = 1; i <= videoList.length; i++) {
+					body += '\t\t<input name="videoList" type="button" value="' + i + '" style="font-size: 50px;padding-left: 30px;padding-right: 30px;">';
+				}
+			}
+			videoBody.innerHTML = body;
+
+			document.getElementById('prev').addEventListener('click', function(e) {
+				prev();
+			});
+			document.getElementById('next').addEventListener('click', function(e) {
+				next();
+			});
+
+			if (multiVideo) {
+				var videoElementList = document.getElementsByName('videoList');
+				for (let i = 0; i < videoElementList.length; i++) {
+					videoElementList[i].addEventListener('click', function(e) {
+						chooseVideo(e);
+					});
+				}
+			}
+		});
+
+		function prev() {
+			// 非多资源 | 当前已为第一个资源
+			if (cur === -1 || cur === 0) {
+				return;
+			}
+			// 视频资源存在 & 更新后的游标在videoList的范围内
+			if (videoList.length <= 0 || cur - 1 >= videoList.length) {
+				alert("videoList.length < cur, len: " + videoList.length + ", cur: " + cur);
+				return;
+			}
+
+			--cur;
+			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
+			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+		}
+
+		function next() {
+			// 非多资源 | 当前已为最后一个资源
+			if (cur === -1 || cur === videoList.length - 1) {
+				return;
+			}
+			// 视频资源存在 & 更新后的游标在videoList的范围内
+			if (videoList.length <= 0 || cur + 1 >= videoList.length) {
+				alert("videoList.length < cur, len: " + videoList.length + ", cur: " + cur);
+				return;
+			}
+
+			++cur;
+			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
+			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+		}
+
+		function chooseVideo(e) {
+			cur = e.target.value - 1;
+			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
+			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+		}
+	</script>
+
+</body>
+</html>

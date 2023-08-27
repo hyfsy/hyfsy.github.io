@@ -1,6 +1,6 @@
 ---
 layout: default_html
-title: 快捷播放器
+title: 在线播放
 date: 2023-08-27
 excerpt: "方便看视频"
 tags: [html, m3u8]
@@ -13,70 +13,102 @@ project: true
 <head>
 <meta charset="UTF-8">
 <title>在线播放</title>
+<style>
+    .controlButton {
+        width: 100%;
+        height: 150px;
+        font-size: 50px;
+    }
+
+    .preAndTextAndNext {
+        font-size: 50px;
+        height: 100px;
+    }
+
+    .preAndTextAndNextCenter {
+        width: 650px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .videoIFrame {
+        width: 100%;
+        height: 500px;
+    }
+
+    .videoList {
+        width: 19%;
+        height: 150px;
+        font-size: 50px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+</style>
 </head>
 <body>
 	<br />
-	<label for="url" style="font-size: 25px;">M3U8文件地址：</label>
-	<input id="url" name="url" type="text" style="width:500px;height:60px;font-size: 25px;" />
-	<input id="clean" type="button" value="清空" style="font-size: 35px;">
-	<input id="commit" type="button" value="开始播放" style="font-size: 35px;">
+	<input id="url" type="text" placeholder="请输入M3U8文件地址，多个分号 ; 分隔" class="controlButton" />
 	<br />
-	<span>多个分号 ; 分隔</span>
 	<br />
-	<div id="videoBody">
-		<!--<iframe id="video" width="100%" height="500px" src="https://www.baidu.com"></iframe>-->
-		<!--<input id="prev" type="button" value="上一集" style="font-size: 50px;" onclick="prev();">-->
-		<!--<span id="num" style="font-size: 50px;">1/52</span>-->
-		<!--<input id="next" type="button" value="下一集" style="font-size: 50px;" onclick="next();">-->
-		<!--<input name="videoList" type="button" value="1" style="font-size: 50px;margin-left: 5px;margin-right: 5px;" onclick="chooseVideo(event);">-->
-	</div>
+	<input id="commit" type="button" value="解析资源" class="controlButton" style="float:right;">
+	<input id="playAndFullScreen" type="button" value="全屏播放" class="controlButton">
+	<br />
+	<br />
+	<div id="videoBody"></div>
 	<script>
-		var urlInput = document.querySelector('#url');
-		var videoBody = document.querySelector('#videoBody');
+		var urlInput = document.getElementById('url');
+		var videoBody = document.getElementById('videoBody');
 
 		var videoList = [];
 		var cur = -1;
 
 		function getPlayUrl(m3u8Url) {
-			// https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8;https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
-			// https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
-			// https://jx.xbiqu5.com/bofang/?https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
-			// https://help.siwazywcdn2.com:5278/m3u8.php?url=https://064.qgj899.com/20230206/RXf0Azic/index.m3u8
-			return 'https://help.siwazywcdn2.com:5278/m3u8.php?url=' + m3u8Url;
+			return 'https://jx.xbiqu5.com/bofang/?url=' + m3u8Url;
+			// return 'https://jx3.taobaoyingshi.com/analysis.php?v=' + m3u8Url;
+			// return 'https://help.siwazywcdn2.com:5278/m3u8.php?url=' + m3u8Url;
 		}
 
-		document.querySelector('#clean').addEventListener('click', function(e) {
-			urlInput.value = '';
-			videoBody.innerHTML = '';
-		});
-
-		document.querySelector('#commit').addEventListener('click', function(e) {
+		document.getElementById('commit').addEventListener('click', function(e) {
 			if (urlInput.value === '') {
 				alert("请输入资源地址！");
 				return;
 			}
+
 			var m3u8Url = urlInput.value;
+			urlInput.value = '';
 			var urls = m3u8Url.split(";");
 			cur = 0;
 			videoList = urls;
 
-			var multiVideo = videoList.length > 1;
+			// video
+			var body = '<iframe id="videoIFrame" class="videoIFrame" src=""></iframe>';
 
-			var body = '<iframe id="video" width="100%" height="500px" src="' + getPlayUrl(videoList[cur]) + '"></iframe>';
+			// 上下集
+			body +=
+				'\t\t<br /><br />' +
+				'\t\t<span class="preAndTextAndNextCenter">\n' +
+				'\t\t\t<input id="prev" type="button" value="上一集" class="preAndTextAndNext" onclick="prev();">\n' +
+				'\t\t\t<span id="num" class="preAndTextAndNext">' + (cur + 1) + '/' + videoList.length + '</span>\n' +
+				'\t\t\t<input id="next" type="button" value="下一集" class="preAndTextAndNext" onclick="next();">\n' +
+				'\t\t</span>'
+			;
 
-			if (multiVideo) {
-				body +=
-					'\t\t<br />' +
-					'\t\t<input id="prev" type="button" value="上一集" style="font-size: 50px;">\n' +
-					'\t\t<span id="num" style="font-size: 50px;">' + (cur + 1) + '/' + videoList.length + '</span>\n' +
-					'\t\t<input id="next" type="button" value="下一集" style="font-size: 50px;">'
-				;
-				body += '\t\t<br />\t\t<br />';
-				for (let i = 1; i <= videoList.length; i++) {
-					body += '\t\t<input name="videoList" type="button" value="' + i + '" style="font-size: 50px;padding-left: 30px;padding-right: 30px;">';
+			// video列表
+			body += '\t\t<br />';
+			for (let i = 1; i <= videoList.length; i++) {
+				body += '\t\t<input name="videoList" type="button" class="videoList" value="' + i + '">';
+				if (i % 5 === 0) {
+					body += '\t\t<br />';
 				}
 			}
+
 			videoBody.innerHTML = body;
+
+			// 启动
+
+			changeCurrentVideo();
+
+			// video事件添加
 
 			document.getElementById('prev').addEventListener('click', function(e) {
 				prev();
@@ -84,20 +116,46 @@ project: true
 			document.getElementById('next').addEventListener('click', function(e) {
 				next();
 			});
+			var videoElementList = document.getElementsByName('videoList');
+			for (let i = 0; i < videoElementList.length; i++) {
+				videoElementList[i].addEventListener('click', function(e) {
+					chooseVideo(e);
+				});
+			}
+		});
 
-			if (multiVideo) {
-				var videoElementList = document.getElementsByName('videoList');
-				for (let i = 0; i < videoElementList.length; i++) {
-					videoElementList[i].addEventListener('click', function(e) {
-						chooseVideo(e);
-					});
+		// TODO
+		document.getElementById('playAndFullScreen').addEventListener('click', function(e) {
+			var videoElements = document.getElementsByTagName("video");
+			alert("video元素数量：" + videoElements.length);
+			if (videoElements.length > 0) {
+				alert("videoElements.length > 0");
+				var video = videoElements[0];
+				// 播放
+				video.play();
+				alert("played");
+				// 全屏
+				if (video.requestFullscreen) {
+					alert("requestFullscreen");
+					video.requestFullscreen();
+				} else if (video.mozRequestFullScreen) {
+					alert("mozRequestFullScreen");
+					video.mozRequestFullScreen();
+				} else if (video.webkitRequestFullscreen) {
+					alert("webkitRequestFullscreen");
+					// vid.webkitEnterFullscreen();
+					// video.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+					video.webkitEnterFullscreen();
+				} else if (video.msRequestFullscreen) {
+					alert("msRequestFullscreen");
+					video.msRequestFullscreen();
 				}
 			}
 		});
 
 		function prev() {
-			// 非多资源 | 当前已为第一个资源
-			if (cur === -1 || cur === 0) {
+			// 当前已为第一个资源
+			if (cur === 0) {
 				return;
 			}
 			// 视频资源存在 & 更新后的游标在videoList的范围内
@@ -107,13 +165,12 @@ project: true
 			}
 
 			--cur;
-			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
-			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+			changeCurrentVideo();
 		}
 
 		function next() {
-			// 非多资源 | 当前已为最后一个资源
-			if (cur === -1 || cur === videoList.length - 1) {
+			// 当前已为最后一个资源
+			if (cur === videoList.length - 1) {
 				return;
 			}
 			// 视频资源存在 & 更新后的游标在videoList的范围内
@@ -123,14 +180,17 @@ project: true
 			}
 
 			++cur;
-			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
-			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+			changeCurrentVideo();
 		}
 
 		function chooseVideo(e) {
 			cur = e.target.value - 1;
-			document.querySelector('#num').textContent = (cur + 1) + '/' + videoList.length;
-			document.querySelector('#video').src = getPlayUrl(videoList[cur]);
+			changeCurrentVideo();
+		}
+
+		function changeCurrentVideo() {
+			document.getElementById('num').textContent = (cur + 1) + '/' + videoList.length;
+			document.getElementById('videoIFrame').src = getPlayUrl(videoList[cur]);
 		}
 	</script>
 

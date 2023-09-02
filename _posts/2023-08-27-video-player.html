@@ -62,14 +62,6 @@ project: true
 		var videoList = [];
 		var cur = -1;
 
-		function getPlayUrl(m3u8Url) {
-			return 'https://www.zzylkj.com/js/player/dplayer/dplayer.html?videourl=,' + m3u8Url;
-			// return 'https://jx3.taobaoyingshi.com/analysis.php?v=' + m3u8Url;
-			// return 'https://jx3.taobaoyingshi.com/?url=' + m3u8Url;
-			// return 'https://jx.xbiqu5.com/bofang/?url=' + m3u8Url;
-			// return 'https://help.siwazywcdn2.com:5278/m3u8.php?url=' + m3u8Url;
-		}
-
 		document.getElementById('commit').addEventListener('click', function(e) {
 			if (urlInput.value === '') {
 				alert("请输入资源地址！");
@@ -83,15 +75,15 @@ project: true
 			videoList = urls;
 
 			// video
-			var body = '<iframe id="videoIFrame" class="videoIFrame" src=""></iframe>';
+			var body = '<iframe id="videoIFrame" class="videoIFrame" src="" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>';
 
 			// 上下集
 			body +=
 				'\t\t<br /><br />' +
 				'\t\t<span class="preAndTextAndNextCenter">\n' +
-				'\t\t\t<input id="prev" type="button" value="上一集" class="preAndTextAndNext" onclick="prev();">\n' +
+				'\t\t\t<input id="prev" type="button" value="上一集" class="preAndTextAndNext">\n' +
 				'\t\t\t<span id="num" class="preAndTextAndNext">' + (cur + 1) + '/' + videoList.length + '</span>\n' +
-				'\t\t\t<input id="next" type="button" value="下一集" class="preAndTextAndNext" onclick="next();">\n' +
+				'\t\t\t<input id="next" type="button" value="下一集" class="preAndTextAndNext">\n' +
 				'\t\t</span>'
 			;
 
@@ -126,31 +118,33 @@ project: true
 			}
 		});
 
-		// TODO
 		document.getElementById('playAndFullScreen').addEventListener('click', function(e) {
-			var videoElements = document.getElementsByTagName("video");
-			alert("video元素数量：" + videoElements.length);
+			var videoIFrame = document.getElementById("videoIFrame");
+			if (videoIFrame == null) {
+				alert("视频还没加载！");
+				return;
+			}
+			var videoElements = videoIFrame.contentWindow.document.getElementsByTagName("video");
 			if (videoElements.length > 0) {
-				alert("videoElements.length > 0");
 				var video = videoElements[0];
 				// 播放
 				video.play();
-				alert("played");
 				// 全屏
+				// windows
 				if (video.requestFullscreen) {
-					alert("requestFullscreen");
 					video.requestFullscreen();
-				} else if (video.mozRequestFullScreen) {
-					alert("mozRequestFullScreen");
-					video.mozRequestFullScreen();
-				} else if (video.webkitRequestFullscreen) {
-					alert("webkitRequestFullscreen");
-					// vid.webkitEnterFullscreen();
-					// video.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+				}
+				// iphone safiri
+				else if (video.webkitEnterFullscreen) {
 					video.webkitEnterFullscreen();
+				} else if (video.webkitRequestFullscreen) {
+					video.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+				} else if (video.mozRequestFullScreen) {
+					video.mozRequestFullScreen();
 				} else if (video.msRequestFullscreen) {
-					alert("msRequestFullscreen");
 					video.msRequestFullscreen();
+				} else {
+					alert("该浏览器不支持全屏！");
 				}
 			}
 		});
@@ -192,7 +186,7 @@ project: true
 
 		function changeCurrentVideo() {
 			document.getElementById('num').textContent = (cur + 1) + '/' + videoList.length;
-			document.getElementById('videoIFrame').src = getPlayUrl(videoList[cur]);
+			document.getElementById('videoIFrame').src = 'hls/m3u8.html?url=' + videoList[cur];
 		}
 	</script>
 
